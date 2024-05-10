@@ -66,8 +66,8 @@ const HamburgerMenu = ()=>{
             <MenubarMenu>
                 <MenubarTrigger><GiHamburgerMenu /></MenubarTrigger>
                 <MenubarContent className="flex flex-col">
-                    {routes.map((route)=>(
-                       <div>
+                    {routes.map((route, index)=>(
+                       <div key={index}>
                         <MenubarItem>
                         <Link
                             key={route.href}
