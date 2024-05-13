@@ -18,11 +18,15 @@ export async function POST(
     req: Request,
     {params}:{params:{storeId: string}}
 ) {
-    const {productIds} = await req.json()
+    const {productIds,userId} = await req.json()
     if(!productIds || productIds.length==0){
         return new NextResponse("Product ids are required")
     }
 
+    console.log(userId)
+    if(!userId){
+        return new NextResponse("no user id")
+    }
     const products = await prismadb.product.findMany({
         where:{
             id:{
@@ -30,6 +34,7 @@ export async function POST(
             }
         }
     })
+    console.log(products)
 
     const line_items : Stripe.Checkout.SessionCreateParams.LineItem[] = []
     products.forEach((product:Product)=>{
@@ -44,11 +49,13 @@ export async function POST(
             }
         })
     });
+    console.log(line_items)
 
     const order = await prismadb.order.create({
         data:{
             storeId:params.storeId,
             isPaid:false,
+            userId,
             orderItem:{
                 create: productIds.map((productId:string)=>({
                     product:{
@@ -61,6 +68,7 @@ export async function POST(
         }
     });
 
+    console.log(order)
     const session = await stripe.checkout.sessions.create({
         line_items,
         mode: "payment",
@@ -75,6 +83,7 @@ export async function POST(
         }
     });
 
+    console.log("get session")
     return NextResponse.json({url: session.url},{
         headers: corsHeaders
     })

@@ -125,6 +125,7 @@ model Image{
 
 model Order{
   id String @id @default(uuid())
+  userId String
   phone String   @default("")
   address String   @default("")
   isPaid Boolean  @default(false)

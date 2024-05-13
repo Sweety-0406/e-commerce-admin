@@ -80,10 +80,19 @@ export const columns: ColumnDef<ColorColumnType>[] = [
   {
     accessorKey: "value",
     header: "Value",
-    cell: CellActions,
+    cell: ({ row }) => (
+      <div className="flex items-center gap-x-2">
+        {row.original.value}
+        <div className="h-6 w-6 rounded-full border" style={{ backgroundColor: row.original.value }} />
+      </div>
+    )
   },
   {
     accessorKey: "date",
     header: "Date",
+  },
+  {
+    id: "actions",
+    cell: CellActions,
   },
 ];
