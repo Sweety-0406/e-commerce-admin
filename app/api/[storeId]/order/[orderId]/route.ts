@@ -15,6 +15,17 @@ export async function GET(
         const order = await prismadb.order.findMany({
             where:{
                 userId : orderId
+            },
+            include:{
+                orderItem:{
+                    include:{
+                        product:{
+                            include:{
+                                images:true
+                            }
+                        }
+                    }
+                }
             }
         })
     
