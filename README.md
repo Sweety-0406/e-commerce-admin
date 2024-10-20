@@ -1,6 +1,6 @@
 # Full Stack E-Commerce + Dashboard: Next.js 14 App Router, React, Tailwind, Prisma, PostgreSQL
 
-![alt text](<Screenshot 2024-10-20 223047.png>)
+![IMAGE](https://github.com/user-attachments/assets/1904fe82-af3a-4dda-9bf0-f2475405a366)
 
 This is a repository for a Full Stack E-Commerce + Dashboard: Next.js 14 App Router, React, Tailwind, Prisma, PostgreSQL
 
